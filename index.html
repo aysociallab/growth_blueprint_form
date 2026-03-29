@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AY Social Lab | Client Discovery Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --teal: #2a9d9d;
+    --teal-dark: #1d7a7a;
+    --teal-light: #e8f6f6;
+    --ink: #0f1923;
+    --charcoal: #1a2633;
+    --mid: #4a5568;
+    --muted: #8898aa;
+    --border: #d1dce8;
+    --cream: #f7f9fc;
+    --white: #ffffff;
+    --gold: #c9a84c;
+    --success: #2ecc71;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ─── NAVBAR ─── */
+  .navbar {
+    background: var(--charcoal);
+    padding: 0 48px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid var(--teal);
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .nav-logo img {
+    height: 46px;
+    width: 46px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  .nav-brand {
+    display: flex;
+    flex-direction: column;
+  }
+  .nav-brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.1;
+    letter-spacing: 0.3px;
+  }
+  .nav-brand-tagline {
+    font-size: 10px;
+    color: var(--teal);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .nav-badge {
+    background: var(--teal);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 2px;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: var(--charcoal);
+    padding: 72px 48px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 20% 50%, rgba(42,157,157,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 60% at 80% 50%, rgba(42,157,157,0.08) 0%, transparent 70%);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--teal), transparent);
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(42,157,157,0.15);
+    border: 1px solid rgba(42,157,157,0.3);
+    color: var(--teal);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 2px;
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(34px, 5vw, 56px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .hero h1 span { color: var(--teal); }
+  .hero-desc {
+    font-size: 15px;
+    color: #9bb0c4;
+    line-height: 1.75;
+    font-weight: 300;
+    max-width: 520px;
+    margin: 0 auto 36px;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--teal);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .hero-stat-label {
+    font-size: 10px;
+    color: #6b8299;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* ─── PROGRESS ─── */
+  .progress-wrap {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 48px;
+    position: sticky;
+    top: 72px;
+    z-index: 90;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .progress-track {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+  .prog-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 60px;
+  }
+  .prog-dot {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .prog-dot.active { border-color: var(--teal); background: var(--teal); color: #fff; box-shadow: 0 0 0 4px rgba(42,157,157,0.15); }
+  .prog-dot.done { border-color: var(--teal); background: var(--teal-light); color: var(--teal); }
+  .prog-label {
+    font-size: 9px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 5px;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+  .prog-dot.active ~ .prog-label { color: var(--teal); }
+  .prog-step.step-active .prog-label { color: var(--teal); font-weight: 600; }
+  .prog-line {
+    height: 2px;
+    width: 32px;
+    background: var(--border);
+    margin-bottom: 18px;
+    transition: background 0.3s;
+    flex-shrink: 0;
+  }
+  .prog-line.done { background: var(--teal); }
+
+  /* ─── MAIN LAYOUT ─── */
+  .main { max-width: 820px; margin: 0 auto; padding: 52px 24px 100px; }
+
+  /* ─── SECTION ─── */
+  .form-section { display: none; animation: slideIn 0.35s ease; }
+  .form-section.active { display: block; }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 44px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 52px; height: 52px;
+    background: var(--teal);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .section-meta { flex: 1; }
+  .section-num {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 6px;
+  }
+  .section-meta h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--charcoal);
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .section-meta p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ─── FIELDS ─── */
+  .field { margin-bottom: 28px; }
+  .field-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: 10px;
+    letter-spacing: 0.1px;
+  }
+  .field-label .req { color: #e53e3e; font-size: 14px; }
+  .field-label .icon { font-size: 14px; }
+
+  input[type="text"],
+  textarea,
+  select {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    border-radius: 6px;
+    padding: 13px 16px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+  }
+  input[type="text"]:focus,
+  textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(42,157,157,0.12); }
+  textarea { min-height: 108px; resize: vertical; line-height: 1.65; }
+  input::placeholder, textarea::placeholder { color: #b0bec5; }
+
+  /* Grid options */
+  .opt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+  }
+  .opt-grid.two-col { grid-template-columns: 1fr 1fr; }
+  .opt-grid.three-col { grid-template-columns: 1fr 1fr 1fr; }
+  .opt-item { position: relative; }
+  .opt-item input { display: none; }
+  .opt-item label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--mid);
+    transition: all 0.2s;
+    background: var(--white);
+    margin: 0;
+    user-select: none;
+  }
+  .opt-item label::before {
+    content: '';
+    width: 16px; height: 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 3px;
+    flex-shrink: 0;
+    background: var(--white);
+    transition: all 0.2s;
+  }
+  .opt-item input[type="radio"] + label::before { border-radius: 50%; }
+  .opt-item input:checked + label {
+    border-color: var(--teal);
+    background: var(--teal-light);
+    color: var(--charcoal);
+    font-weight: 500;
+  }
+  .opt-item input:checked + label::before {
+    background: var(--teal);
+    border-color: var(--teal);
+  }
+  .opt-item label:hover { border-color: var(--teal); color: var(--charcoal); }
+
+  /* Toggle yes/no */
+  .toggle-row { display: flex; gap: 12px; }
+  .toggle-item input { display: none; }
+  .toggle-item label {
+    padding: 11px 32px;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--mid);
+    transition: all 0.2s;
+    background: var(--white);
+    letter-spacing: 0.3px;
+  }
+  .toggle-item input:checked + label {
+    background: var(--charcoal);
+    border-color: var(--charcoal);
+    color: #fff;
+  }
+
+  /* Divider */
+  .field-divider {
+    height: 1px;
+    background: linear-gradient(to right, var(--teal), transparent);
+    margin: 36px 0;
+    opacity: 0.3;
+  }
+
+  /* ─── NAV BUTTONS ─── */
+  .form-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 52px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+  .btn-back {
+    display: flex; align-items: center; gap: 6px;
+    padding: 12px 24px;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    background: var(--white);
+    color: var(--mid);
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-back:hover { border-color: var(--charcoal); color: var(--charcoal); }
+
+  .btn-next {
+    display: flex; align-items: center; gap: 8px;
+    padding: 14px 36px;
+    background: var(--teal);
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 4px 14px rgba(42,157,157,0.3);
+  }
+  .btn-next:hover { background: var(--teal-dark); box-shadow: 0 6px 20px rgba(42,157,157,0.4); transform: translateY(-1px); }
+  .btn-next.submit-btn {
+    background: var(--charcoal);
+    box-shadow: 0 4px 14px rgba(26,38,51,0.3);
+  }
+  .btn-next.submit-btn:hover { background: #0f1923; }
+
+  /* Step counter */
+  .step-counter {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .step-counter span { color: var(--teal); font-weight: 700; }
+
+  /* ─── THANK YOU ─── */
+  #thankyou-page {
+    display: none;
+    min-height: 70vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px;
+    animation: slideIn 0.6s ease;
+  }
+  #thankyou-page.active { display: flex; }
+  .thankyou-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 64px 52px;
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+    position: relative;
+    overflow: hidden;
+  }
+  .thankyou-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(to right, var(--teal), var(--teal-dark));
+  }
+  .ty-check {
+    width: 80px; height: 80px;
+    background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+    border-radius: 50%;
+    margin: 0 auto 32px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 34px;
+    animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+  }
+  @keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+  .ty-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 16px;
+  }
+  .ty-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--charcoal);
+    line-height: 1.25;
+    margin-bottom: 20px;
+  }
+  .ty-desc {
+    font-size: 15px;
+    color: var(--mid);
+    line-height: 1.8;
+    margin-bottom: 36px;
+  }
+  .ty-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 32px 0;
+  }
+  .ty-promise {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    text-align: left;
+    padding: 20px;
+    background: var(--teal-light);
+    border-radius: 8px;
+    border: 1px solid rgba(42,157,157,0.2);
+    margin-bottom: 12px;
+  }
+  .ty-promise-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+  .ty-promise-text { font-size: 13px; color: var(--charcoal); line-height: 1.6; }
+  .ty-promise-text strong { font-weight: 600; display: block; margin-bottom: 2px; }
+  .ty-brand {
+    margin-top: 36px;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .ty-brand img { height: 36px; border-radius: 4px; }
+  .ty-brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--charcoal);
+  }
+  .ty-brand-sub { font-size: 10px; color: var(--teal); letter-spacing: 1.5px; text-transform: uppercase; }
+
+  /* ─── LOADING ─── */
+  #loading-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 25, 35, 0.7);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  #loading-overlay.active { display: flex; }
+  .loading-box {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 48px 56px;
+    text-align: center;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.2);
+  }
+  .loading-spinner {
+    width: 48px; height: 48px;
+    border: 3px solid var(--border);
+    border-top-color: var(--teal);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--charcoal); margin-bottom: 6px; }
+  .loading-sub { font-size: 13px; color: var(--muted); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--charcoal);
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: #4a6070;
+    letter-spacing: 0.5px;
+  }
+  footer span { color: var(--teal); }
+
+  @media (max-width: 640px) {
+    .hero { padding: 48px 24px 40px; }
+    .navbar { padding: 0 20px; }
+    .progress-wrap { padding: 16px 20px; }
+    .opt-grid { grid-template-columns: 1fr 1fr; }
+    .opt-grid.three-col { grid-template-columns: 1fr 1fr; }
+    .hero-stats { gap: 24px; }
+    .thankyou-card { padding: 40px 24px; }
+    .prog-line { width: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAVBAR ─── -->
+<nav class="navbar">
+  <div class="nav-logo">
+    <img src="data:image/jpeg;base64,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" alt="AY Social Lab Logo"/>
+    <div class="nav-brand">
+      <div class="nav-brand-name">AY Social Lab</div>
+      <div class="nav-brand-tagline">Strategy · Content · Growth</div>
+    </div>
+  </div>
+  <div class="nav-badge">Client Discovery</div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">🚀 AY Social Lab | Client Discovery Form</div>
+    <h1>Let's Build Your <span>Growth Plan</span> Together</h1>
+    <p class="hero-desc">Fill this form to receive a customized digital marketing strategy tailored to your brand — crafted by our expert team. Takes only 8–10 minutes.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">10</div>
+        <div class="hero-stat-label">Sections</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">8 min</div>
+        <div class="hero-stat-label">Avg. Time</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">Confidential</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROGRESS ─── -->
+<div class="progress-wrap">
+  <div class="progress-track" id="progressTrack"></div>
+</div>
+
+<!-- ─── MAIN FORM ─── -->
+<div class="main" id="formMain">
+
+  <!-- SECTION 1 -->
+  <div class="form-section active" id="sec-0">
+    <div class="section-head">
+      <div class="section-icon">🏢</div>
+      <div class="section-meta">
+        <div class="section-num">Section 01 of 10</div>
+        <h2>Business Overview</h2>
+        <p>Let's start with the foundation — tell us who you are and what you do.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">🏷️</span> Business / Brand Name <span class="req">*</span></div>
+      <input type="text" id="businessName" placeholder="e.g. Bloom Decor Studio"/>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">📖</span> Briefly describe your business and what you offer</div>
+      <textarea id="businessDesc" placeholder="Tell us about your business, what you sell or offer, and how you help your customers..."></textarea>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">💡</span> What makes your brand unique (USP)?</div>
+      <textarea id="usp" placeholder="What sets you apart from others in your industry?"></textarea>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">🏢</span> Industry / Category</div>
+      <input type="text" id="industry" placeholder="e.g. Event Decoration, Fashion, Food & Beverage, Real Estate..."/>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">📍</span> Business location / areas you serve</div>
+      <input type="text" id="location" placeholder="e.g. Pune, Mumbai, Pan India..."/>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="form-section" id="sec-1">
+    <div class="section-head">
+      <div class="section-icon">👥</div>
+      <div class="section-meta">
+        <div class="section-num">Section 02 of 10</div>
+        <h2>Target Audience</h2>
+        <p>Understanding your customer is the heart of every successful campaign.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">🎯</span> Who is your ideal customer?</div>
+      <textarea id="idealCustomer" placeholder="Age, profession, interests, lifestyle, spending capacity..."></textarea>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">🌍</span> Target market</div>
+      <div class="opt-grid two-col">
+        <div class="opt-item"><input type="radio" id="tm1" name="targetMarket" value="Local"><label for="tm1">Local</label></div>
+        <div class="opt-item"><input type="radio" id="tm2" name="targetMarket" value="City-wide"><label for="tm2">City-wide</label></div>
+        <div class="opt-item"><input type="radio" id="tm3" name="targetMarket" value="National"><label for="tm3">National</label></div>
+        <div class="opt-item"><input type="radio" id="tm4" name="targetMarket" value="International"><label for="tm4">International</label></div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">⚠️</span> What problems does your product/service solve?</div>
+      <textarea id="problemsSolved" placeholder="What pain points or frustrations does your brand address?"></textarea>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">❤️</span> Why should customers choose you over competitors?</div>
+      <textarea id="whyChoose" placeholder="Your key differentiator and value proposition..."></textarea>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="form-section" id="sec-2">
+    <div class="section-head">
+      <div class="section-icon">🎯</div>
+      <div class="section-meta">
+        <div class="section-num">Section 03 of 10</div>
+        <h2>Business Goals</h2>
+        <p>Clarity on your objectives shapes the entire campaign strategy.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">🚀</span> Primary goal for the next 30 days</div>
+      <div class="opt-grid two-col">
+        <div class="opt-item"><input type="radio" id="g1" name="primaryGoal" value="Increase brand awareness"><label for="g1">Increase Brand Awareness</label></div>
+        <div class="opt-item"><input type="radio" id="g2" name="primaryGoal" value="Generate leads/inquiries"><label for="g2">Generate Leads / Inquiries</label></div>
+        <div class="opt-item"><input type="radio" id="g3" name="primaryGoal" value="Increase sales"><label for="g3">Increase Sales</label></div>
+        <div class="opt-item"><input type="radio" id="g4" name="primaryGoal" value="Grow social media presence"><label for="g4">Grow Social Media</label></div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">📈</span> Expected results (leads, sales, followers, etc.)</div>
+      <input type="text" id="expectedResults" placeholder="e.g. 30 leads, 10 bookings, 500 new followers"/>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">💰</span> Average product/service value (₹)</div>
+      <input type="text" id="avgValue" placeholder="e.g. ₹8,000 per booking"/>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="form-section" id="sec-3">
+    <div class="section-head">
+      <div class="section-icon">📱</div>
+      <div class="section-meta">
+        <div class="section-num">Section 04 of 10</div>
+        <h2>Current Online Presence</h2>
+        <p>Let's audit where you stand in the digital landscape today.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">📲</span> Active platforms</div>
+      <div class="opt-grid three-col">
+        <div class="opt-item"><input type="checkbox" id="p1" name="platforms" value="Instagram"><label for="p1">Instagram</label></div>
+        <div class="opt-item"><input type="checkbox" id="p2" name="platforms" value="Facebook"><label for="p2">Facebook</label></div>
+        <div class="opt-item"><input type="checkbox" id="p3" name="platforms" value="LinkedIn"><label for="p3">LinkedIn</label></div>
+        <div class="opt-item"><input type="checkbox" id="p4" name="platforms" value="YouTube"><label for="p4">YouTube</label></div>
+        <div class="opt-item"><input type="checkbox" id="p5" name="platforms" value="Website"><label for="p5">Website</label></div>
+        <div class="opt-item"><input type="checkbox" id="p6" name="platforms" value="None"><label for="p6">None</label></div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">👥</span> Approximate followers / audience size</div>
+      <input type="text" id="followers" placeholder="e.g. 1,200 on Instagram, 300 on Facebook"/>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">🎥</span> What type of content have you posted before?</div>
+      <textarea id="pastContent" placeholder="Describe the type of posts, reels, stories, blogs you've created..."></textarea>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">🔥</span> What has worked best for you so far?</div>
+      <textarea id="whatWorked" placeholder="Which posts or campaigns got the most engagement or inquiries?"></textarea>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">💸</span> Currently running paid ads?</div>
+      <div class="toggle-row">
+        <div class="toggle-item"><input type="radio" id="ads1" name="paidAds" value="Yes"><label for="ads1">Yes</label></div>
+        <div class="toggle-item"><input type="radio" id="ads2" name="paidAds" value="No"><label for="ads2">No</label></div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">💰</span> Monthly ad budget (if running ads)</div>
+      <input type="text" id="adBudget" placeholder="e.g. ₹5,000/month"/>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="form-section" id="sec-4">
+    <div class="section-head">
+      <div class="section-icon">🎨</div>
+      <div class="section-meta">
+        <div class="section-num">Section 05 of 10</div>
+        <h2>Brand Identity</h2>
+        <p>Your visual identity and tone of voice shapes every piece of content we create.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">🎨</span> Do you have a logo, brand colors & visual identity?</div>
+      <div class="toggle-row">
+        <div class="toggle-item"><input type="radio" id="logo1" name="hasLogo" value="Yes"><label for="logo1">Yes</label></div>
+        <div class="toggle-item"><input type="radio" id="logo2" name="hasLogo" value="No"><label for="logo2">No</label></div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">✨</span> How do you want your brand to be perceived?</div>
+      <div class="opt-grid three-col">
+        <div class="opt-item"><input type="checkbox" id="bf1" name="brandFeel" value="Premium"><label for="bf1">Premium</label></div>
+        <div class="opt-item"><input type="checkbox" id="bf2" name="brandFeel" value="Professional"><label for="bf2">Professional</label></div>
+        <div class="opt-item"><input type="checkbox" id="bf3" name="brandFeel" value="Fun"><label for="bf3">Fun</label></div>
+        <div class="opt-item"><input type="checkbox" id="bf4" name="brandFeel" value="Modern"><label for="bf4">Modern</label></div>
+        <div class="opt-item"><input type="checkbox" id="bf5" name="brandFeel" value="Traditional"><label for="bf5">Traditional</label></div>
+        <div class="opt-item"><input type="checkbox" id="bf6" name="brandFeel" value="Luxury"><label for="bf6">Luxury</label></div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">🌟</span> Brands you admire or want inspiration from</div>
+      <input type="text" id="brandInspo" placeholder="e.g. boAt, Nykaa, WedMeGood, The Wedding Story..."/>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">🗣️</span> Preferred language for content</div>
+      <div class="opt-grid two-col">
+        <div class="opt-item"><input type="radio" id="l1" name="lang" value="English"><label for="l1">English</label></div>
+        <div class="opt-item"><input type="radio" id="l2" name="lang" value="Hindi"><label for="l2">Hindi</label></div>
+        <div class="opt-item"><input type="radio" id="l3" name="lang" value="Regional Language"><label for="l3">Regional Language</label></div>
+        <div class="opt-item"><input type="radio" id="l4" name="lang" value="Mix"><label for="l4">Mix</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="form-section" id="sec-5">
+    <div class="section-head">
+      <div class="section-icon">📸</div>
+      <div class="section-meta">
+        <div class="section-num">Section 06 of 10</div>
+        <h2>Content & Resources</h2>
+        <p>We'll tailor your strategy to your actual content production capacity.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">📸</span> Do you have photos/videos of your products/services?</div>
+      <div class="toggle-row">
+        <div class="toggle-item"><input type="radio" id="pw1" name="hasMedia" value="Yes"><label for="pw1">Yes</label></div>
+        <div class="toggle-item"><input type="radio" id="pw2" name="hasMedia" value="No"><label for="pw2">No</label></div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">🎥</span> Can you create content regularly?</div>
+      <div class="toggle-row">
+        <div class="toggle-item"><input type="radio" id="cc1" name="canCreateContent" value="Yes"><label for="cc1">Yes</label></div>
+        <div class="toggle-item"><input type="radio" id="cc2" name="canCreateContent" value="No"><label for="cc2">No</label></div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">👥</span> Working solo or with a team?</div>
+      <div class="opt-grid three-col">
+        <div class="opt-item"><input type="radio" id="team1" name="teamSize" value="Solo"><label for="team1">Solo</label></div>
+        <div class="opt-item"><input type="radio" id="team2" name="teamSize" value="Small Team"><label for="team2">Small Team</label></div>
+        <div class="opt-item"><input type="radio" id="team3" name="teamSize" value="Full Team"><label for="team3">Full Team</label></div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">🎬</span> Comfortable appearing on camera?</div>
+      <div class="toggle-row">
+        <div class="toggle-item"><input type="radio" id="cam1" name="onCamera" value="Yes"><label for="cam1">Yes</label></div>
+        <div class="toggle-item"><input type="radio" id="cam2" name="onCamera" value="No"><label for="cam2">No</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="form-section" id="sec-6">
+    <div class="section-head">
+      <div class="section-icon">💼</div>
+      <div class="section-meta">
+        <div class="section-num">Section 07 of 10</div>
+        <h2>Products & Services</h2>
+        <p>Your offerings inform how we position and promote your brand.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">📦</span> Describe your main products/services</div>
+      <textarea id="services" placeholder="List what you offer, what's included, and the price range..."></textarea>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">🛠️</span> Do you offer customization?</div>
+      <div class="toggle-row">
+        <div class="toggle-item"><input type="radio" id="cust1" name="customization" value="Yes"><label for="cust1">Yes</label></div>
+        <div class="toggle-item"><input type="radio" id="cust2" name="customization" value="No"><label for="cust2">No</label></div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">🎁</span> Any current offers, discounts, or packages?</div>
+      <input type="text" id="offers" placeholder="e.g. 15% off on early bookings, Combo package at ₹12,000"/>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">📞</span> How do customers usually contact or buy from you?</div>
+      <div class="opt-grid">
+        <div class="opt-item"><input type="radio" id="bm1" name="bookingMethod" value="Instagram DM"><label for="bm1">Instagram DM</label></div>
+        <div class="opt-item"><input type="radio" id="bm2" name="bookingMethod" value="WhatsApp"><label for="bm2">WhatsApp</label></div>
+        <div class="opt-item"><input type="radio" id="bm3" name="bookingMethod" value="Website"><label for="bm3">Website</label></div>
+        <div class="opt-item"><input type="radio" id="bm4" name="bookingMethod" value="Call"><label for="bm4">Call</label></div>
+        <div class="opt-item"><input type="radio" id="bm5" name="bookingMethod" value="Offline Store"><label for="bm5">Offline Store</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8 -->
+  <div class="form-section" id="sec-7">
+    <div class="section-head">
+      <div class="section-icon">📍</div>
+      <div class="section-meta">
+        <div class="section-num">Section 08 of 10</div>
+        <h2>Marketing & Sales</h2>
+        <p>Hyperlocal and collaborative strategies are often the fastest path to real results.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">📍</span> Which areas/markets do you want to target?</div>
+      <input type="text" id="targetAreas" placeholder="e.g. Baner, Wakad, Kharadi, Pune, Mumbai Metro..."/>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">🤝</span> Do you collaborate with other brands or partners?</div>
+      <div class="toggle-row">
+        <div class="toggle-item"><input type="radio" id="col1" name="collabs" value="Yes"><label for="col1">Yes</label></div>
+        <div class="toggle-item"><input type="radio" id="col2" name="collabs" value="No"><label for="col2">No</label></div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">🔁</span> Do you get repeat customers?</div>
+      <div class="toggle-row">
+        <div class="toggle-item"><input type="radio" id="rep1" name="repeatCustomers" value="Yes"><label for="rep1">Yes</label></div>
+        <div class="toggle-item"><input type="radio" id="rep2" name="repeatCustomers" value="No"><label for="rep2">No</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 9 -->
+  <div class="form-section" id="sec-8">
+    <div class="section-head">
+      <div class="section-icon">⭐</div>
+      <div class="section-meta">
+        <div class="section-num">Section 09 of 10</div>
+        <h2>Trust & Credibility</h2>
+        <p>Social proof is one of your most powerful conversion tools.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">⭐</span> Do you have customer reviews/testimonials?</div>
+      <div class="toggle-row">
+        <div class="toggle-item"><input type="radio" id="rev1" name="testimonials" value="Yes"><label for="rev1">Yes</label></div>
+        <div class="toggle-item"><input type="radio" id="rev2" name="testimonials" value="No"><label for="rev2">No</label></div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">📸</span> Do you have case studies or past work examples?</div>
+      <div class="toggle-row">
+        <div class="toggle-item"><input type="radio" id="cs1" name="caseStudies" value="Yes"><label for="cs1">Yes</label></div>
+        <div class="toggle-item"><input type="radio" id="cs2" name="caseStudies" value="No"><label for="cs2">No</label></div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">🏆</span> Major achievements, clients, or milestones</div>
+      <textarea id="achievements" placeholder="Share any noteworthy events, prestigious clients, awards, or milestones you've achieved..."></textarea>
+    </div>
+  </div>
+
+  <!-- SECTION 10 -->
+  <div class="form-section" id="sec-9">
+    <div class="section-head">
+      <div class="section-icon">🚀</div>
+      <div class="section-meta">
+        <div class="section-num">Section 10 of 10</div>
+        <h2>Expectations from AY Social Lab</h2>
+        <p>This is the most important section — your honest answers power our strategy for you.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">💡</span> What are your expectations from us?</div>
+      <textarea id="expectations" placeholder="What outcomes would make this collaboration a success for you?"></textarea>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">📊</span> Services you are looking for</div>
+      <div class="opt-grid two-col">
+        <div class="opt-item"><input type="checkbox" id="sv1" name="servicesNeeded" value="Social Media Strategy"><label for="sv1">Social Media Strategy</label></div>
+        <div class="opt-item"><input type="checkbox" id="sv2" name="servicesNeeded" value="Content Creation"><label for="sv2">Content Creation</label></div>
+        <div class="opt-item"><input type="checkbox" id="sv3" name="servicesNeeded" value="Social Media Management"><label for="sv3">Social Media Management</label></div>
+        <div class="opt-item"><input type="checkbox" id="sv4" name="servicesNeeded" value="Paid Ads"><label for="sv4">Paid Ads</label></div>
+        <div class="opt-item"><input type="checkbox" id="sv5" name="servicesNeeded" value="Branding"><label for="sv5">Branding</label></div>
+      </div>
+    </div>
+    <div class="field-divider"></div>
+    <div class="field">
+      <div class="field-label"><span class="icon">⚠️</span> Biggest challenge right now</div>
+      <textarea id="biggestChallenge" placeholder="Be honest — what's the #1 thing holding you back?"></textarea>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">🚧</span> What do you think is stopping your growth?</div>
+      <textarea id="growthBlocker" placeholder="Is it budget, time, knowledge, team, visibility, or something else?"></textarea>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="icon">🌟</span> What does success look like in the next 3–6 months?</div>
+      <textarea id="successVision" placeholder="Paint the picture — what's your dream outcome for your brand?"></textarea>
+    </div>
+    <div class="field-divider"></div>
+    <div class="field">
+      <div class="field-label"><span class="icon">📞</span> Would you like a FREE strategy consultation call from AY Social Lab?</div>
+      <div class="toggle-row">
+        <div class="toggle-item"><input type="radio" id="cons1" name="consultation" value="Yes"><label for="cons1">Yes, please!</label></div>
+        <div class="toggle-item"><input type="radio" id="cons2" name="consultation" value="No"><label for="cons2">No thanks</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <div class="form-nav" id="formNav">
+    <button class="btn-back" id="btnBack" onclick="navigate(-1)" style="visibility:hidden">← Back</button>
+    <div class="step-counter">Step <span id="stepNum">1</span> of 10</div>
+    <button class="btn-next" id="btnNext" onclick="navigate(1)">Continue →</button>
+  </div>
+</div>
+
+<!-- ─── THANK YOU ─── -->
+<div id="thankyou-page">
+  <div class="thankyou-card">
+    <div class="ty-check">✓</div>
+    <div class="ty-eyebrow">✦ Submission Received</div>
+    <h2 class="ty-title">Thank You for Taking the Time!</h2>
+    <p class="ty-desc">
+      We truly appreciate the effort you've put into sharing your brand story with us.
+      Your responses give us a deep understanding of your business — and that's exactly
+      what we need to craft something exceptional for you.
+    </p>
+    <div class="ty-divider"></div>
+    <div class="ty-promise">
+      <div class="ty-promise-icon">📋</div>
+      <div class="ty-promise-text">
+        <strong>Your plan is being crafted</strong>
+        Our team will review your complete brief and build a customised growth strategy tailored specifically to your brand.
+      </div>
+    </div>
+    <div class="ty-promise">
+      <div class="ty-promise-icon">📞</div>
+      <div class="ty-promise-text">
+        <strong>We'll be in touch within 24–48 hours</strong>
+        Expect a call or message from the AY Social Lab team to walk you through your personalised plan.
+      </div>
+    </div>
+    <div class="ty-promise">
+      <div class="ty-promise-icon">🤝</div>
+      <div class="ty-promise-text">
+        <strong>Joining hands towards your goal</strong>
+        Together, we'll build a brand that stands out, grows consistently, and converts — exactly the way you envisioned.
+      </div>
+    </div>
+    <div class="ty-brand">
+      <img src="data:image/jpeg;base64,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" alt="Logo"/>
+      <div>
+        <div class="ty-brand-name">AY Social Lab</div>
+        <div class="ty-brand-sub">Strategy · Content · Growth</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── LOADING ─── -->
+<div id="loading-overlay">
+  <div class="loading-box">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Submitting Your Brief</div>
+    <p class="loading-sub">Please wait a moment...</p>
+  </div>
+</div>
+
+<footer>
+  © 2025 <span>AY Social Lab</span> · All Rights Reserved · Confidential Client Discovery Form
+</footer>
+
+<script>
+  const TOTAL = 10;
+  let current = 0;
+  const stepLabels = ['Brand','Audience','Goals','Online','Identity','Content','Services','Marketing','Trust','Expectations'];
+
+  function buildProgress() {
+    const track = document.getElementById('progressTrack');
+    track.innerHTML = '';
+    stepLabels.forEach((label, i) => {
+      const step = document.createElement('div');
+      step.className = 'prog-step' + (i === current ? ' step-active' : '');
+      const dot = document.createElement('div');
+      dot.className = 'prog-dot' + (i === current ? ' active' : i < current ? ' done' : '');
+      dot.textContent = i < current ? '✓' : i + 1;
+      const lbl = document.createElement('div');
+      lbl.className = 'prog-label';
+      lbl.textContent = label;
+      step.appendChild(dot);
+      step.appendChild(lbl);
+      if (i < TOTAL - 1) {
+        const line = document.createElement('div');
+        line.className = 'prog-line' + (i < current ? ' done' : '');
+        line.style.marginBottom = '18px';
+        track.appendChild(step);
+        track.appendChild(line);
+      } else {
+        track.appendChild(step);
+      }
+    });
+  }
+
+  function updateNav() {
+    document.getElementById('btnBack').style.visibility = current > 0 ? 'visible' : 'hidden';
+    document.getElementById('stepNum').textContent = current + 1;
+    const btn = document.getElementById('btnNext');
+    if (current === TOTAL - 1) {
+      btn.textContent = '✓ Submit My Brief';
+      btn.className = 'btn-next submit-btn';
+    } else {
+      btn.textContent = 'Continue →';
+      btn.className = 'btn-next';
+    }
+  }
+
+  function navigate(dir) {
+    if (dir === 1 && current === TOTAL - 1) { submitForm(); return; }
+    if (dir === 1 && current < TOTAL - 1) {
+      document.getElementById('sec-' + current).classList.remove('active');
+      current++;
+      document.getElementById('sec-' + current).classList.add('active');
+    } else if (dir === -1 && current > 0) {
+      document.getElementById('sec-' + current).classList.remove('active');
+      current--;
+      document.getElementById('sec-' + current).classList.add('active');
+    }
+    updateNav();
+    buildProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function getVal(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+  function getRadio(name) { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : '—'; }
+  function getChecked(name) { return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(e => e.value).join(', ') || '—'; }
+
+  function submitForm() {
+    document.getElementById('loading-overlay').classList.add('active');
+    setTimeout(() => {
+      document.getElementById('loading-overlay').classList.remove('active');
+      document.getElementById('formMain').style.display = 'none';
+      const ty = document.getElementById('thankyou-page');
+      ty.style.display = 'flex';
+      ty.classList.add('active');
+      document.querySelector('.progress-wrap').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 1800);
+  }
+
+  buildProgress();
+  updateNav();
+</script>
+</body>
+</html>
