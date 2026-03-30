@@ -1219,7 +1219,7 @@
 
   // ─── SEND TO GOOGLE SHEETS ───
   async function sendToGoogleSheets(data) {
-    const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; // 🔁 Replace this
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzxhQS-Hmm7nmXbkWq6hPKHZ4lNsvRhbrURhI1z4h_wWDBSem-u0VXCzu0I9dmYCDAi/exec'; // 🔁 Replace this
     try {
       await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
@@ -1236,12 +1236,12 @@
 
   // ─── SEND EMAIL VIA EMAILJS ───
   async function sendEmail(data) {
-    const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // 🔁 Replace this
-    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // 🔁 Replace this
-    const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // 🔁 Replace this
+    const EMAILJS_SERVICE_ID  = 'service_rrhgcch';   // 🔁 Replace this
+    const EMAILJS_TEMPLATE_ID = 'template_zi9ocds';  // 🔁 Replace this
+    const EMAILJS_PUBLIC_KEY  = 'mm6XWkphxe7h4_1Co';   // 🔁 Replace this
 
     const templateParams = {
-      to_email: 'YOUR_EMAIL@gmail.com',              // 🔁 Replace this
+      to_email: 'aysociallab@gmail.com',              // 🔁 Replace this
       client_name:      data.businessName,
       submitted_at:     data.submittedAt,
       // Section 1
